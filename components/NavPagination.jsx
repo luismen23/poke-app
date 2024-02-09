@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function NavPagination({totalPages, page, createPageUrl, dataLength}) {
+export default function NavPagination({totalPages, page, createPageUrl, dataLength, per_page}) {
     
     const totalPagesArr = new Array(totalPages)
     for (let i = 0; i < totalPagesArr.length; i++) {
@@ -8,7 +8,7 @@ export default function NavPagination({totalPages, page, createPageUrl, dataLeng
     }
 
     return (
-<div className="flex items-center w-[20rem] md:w-[28rem] justify-center mx-auto border-t border-gray-200 bg-white px-2 py-2 sm:px-6 sm:w-[30rem] rounded-md">
+  <div className="flex items-center w-[30rem] justify-center mx-auto border-t border-gray-200 bg-white px-2 py-2 sm:px-6 rounded-md">
   
   <div className="flex flex-1 items-center justify-between">
     <div>
@@ -19,7 +19,7 @@ export default function NavPagination({totalPages, page, createPageUrl, dataLeng
             ? 
             dataLength 
             : 
-            totalPagesArr.reduce((pokemons, pages)  => pages === page ? pokemons * pages : pokemons, 40)
+            totalPagesArr.reduce((pokemons, pages)  => pages === page ? pokemons * pages : pokemons, per_page)
         
         }  
         </span> 
@@ -28,7 +28,7 @@ export default function NavPagination({totalPages, page, createPageUrl, dataLeng
         results
       </p>
     </div>
-    <div>
+    <div className="">
       <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
         <Link href={createPageUrl(page - 1)} className={`relative ${page <= 1 && 'pointer-events-none '} inline-flex items-center rounded-l-md px-2 py-2 text-gray-400  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}>
           <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -39,7 +39,7 @@ export default function NavPagination({totalPages, page, createPageUrl, dataLeng
         {totalPagesArr.map((pages, pagesId) => {
             
           return (
-            <div key={pagesId}>{<Link href={createPageUrl(pages)} className={` ${pages === page ? 'bg-yellow-300 text-red-500' : 'hover:bg-gray-50 focus:z-20 focus:outline-offset-0'} relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 `}>{pages}</Link>}</div>
+            <div key={pagesId}>{<Link href={createPageUrl(pages)} className={` ${pages === page ? 'bg-yellow-300 text-red-500' : 'hover:bg-gray-50 focus:z-20 focus:outline-offset-0'} relative flex flex-wrap items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300   `}>{pages}</Link>}</div>
           )
         })}
         <Link href={createPageUrl(page + 1)} className={`relative ${page === totalPages && 'pointer-events-none '} inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}>
