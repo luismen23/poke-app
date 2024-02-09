@@ -1,6 +1,7 @@
 import { Arvo } from "next/font/google";
 import "./globals.css";
 import NavLink from "@/components/NavLinks";
+import Image from "next/image";
 
 
 
@@ -14,8 +15,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${arvo.className} antialiased`}>
-        <div>
+      <body className={`${arvo.className} antialiased w-full h-full`}>
+        <Image src='/img/bg.jpg' width={1000} height={1000} alt="bg" className="h-screen absolute opacity-20 top-0 w-full z-0 object-cover" />
+        <div className="">
           <NavLink />
         </div>
       

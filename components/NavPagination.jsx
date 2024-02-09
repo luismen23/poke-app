@@ -1,7 +1,6 @@
 import Link from "next/link";
 
-export default function NavPagination({totalPages, page, createPageUrl, per_page, dataLength}) {
-
+export default function NavPagination({totalPages, page, createPageUrl, dataLength}) {
     
     const totalPagesArr = new Array(totalPages)
     for (let i = 0; i < totalPagesArr.length; i++) {
@@ -9,40 +8,40 @@ export default function NavPagination({totalPages, page, createPageUrl, per_page
     }
 
     return (
-<div className="flex items-center w-[25rem] justify-center mx-auto border-t border-gray-200 bg-white px-2 py-2 sm:px-6 sm:w-[30rem] rounded-md mt-5">
+<div className="flex items-center w-[20rem] md:w-[28rem] justify-center mx-auto border-t border-gray-200 bg-white px-2 py-2 sm:px-6 sm:w-[30rem] rounded-md">
   
   <div className="flex flex-1 items-center justify-between">
     <div>
-      <p className="text-sm text-gray-700">
-        <span className="font-medium"> {per_page} </span>
-        of
+      <p className="text-xs md:text-sm text-gray-700">
+        <span className="font-medium">
+        {
+          page >= totalPages 
+            ? 
+            dataLength 
+            : 
+            totalPagesArr.reduce((pokemons, pages)  => pages === page ? pokemons * pages : pokemons, 40)
+        
+        }  
+        </span> 
+        <span> of</span>
         <span className="font-medium"> {dataLength} </span>
         results
       </p>
     </div>
     <div>
       <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-        <Link href={createPageUrl(page - 1)} className={`relative ${page <= 1 && 'pointer-events-none '} inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}>
-          <span className="sr-only">Previous</span>
+        <Link href={createPageUrl(page - 1)} className={`relative ${page <= 1 && 'pointer-events-none '} inline-flex items-center rounded-l-md px-2 py-2 text-gray-400  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}>
           <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fillRule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clipRule="evenodd" />
           </svg>
         </Link>
 
         {totalPagesArr.map((pages, pagesId) => {
-  
+            
           return (
             <div key={pagesId}>{<Link href={createPageUrl(pages)} className={` ${pages === page ? 'bg-yellow-300 text-red-500' : 'hover:bg-gray-50 focus:z-20 focus:outline-offset-0'} relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 `}>{pages}</Link>}</div>
           )
         })}
-        {/* <!-- Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" --> */}
-        {/* <Link href="#" aria-current="page" className="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">1</Link>
-        <Link href="#" className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">2</Link>
-        <Link href="#" className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">3</Link>
-        <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">...</span>
-        <Link href="#" className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">8</Link>
-        <Link href="#" className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">9</Link>
-        <Link href="#" className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">10</Link> */}
         <Link href={createPageUrl(page + 1)} className={`relative ${page === totalPages && 'pointer-events-none '} inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}>
           <span className="sr-only">Next</span>
           <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

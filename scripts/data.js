@@ -1,5 +1,5 @@
 const POKE_API = 'https://pokeapi.co/api/v2/pokemon/'
-const POKE_GEN = 'https://pokeapi.co/api/v2/generation/'
+const POKE_GEN = 'https://pokeapi.co/api/v2/version-group/?offset=0&limit=30/'
 
 export async function fetchPokemon( limit, offset) {
     const response = await fetch(POKE_API + `?limit=${limit}&offset=${offset}`)
@@ -7,8 +7,8 @@ export async function fetchPokemon( limit, offset) {
     return data
 }
 
-export async function fetchGenerations(id) {
-    const response = await fetch(`${POKE_GEN}${id}`)
+export async function fetchGames() {
+    const response = await fetch(`${POKE_GEN}`)
     const data = await response.json()
     return data
 }

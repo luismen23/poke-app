@@ -7,7 +7,7 @@ export default async function Home({searchParams}) {
   // const query = await searchParams?.query || ''
 
   return (
-    <main className="flex flex-col items-center">
+    <main className="flex flex-col items-center w-screen h-screen ">
       <HomePage />
     </main>
   );

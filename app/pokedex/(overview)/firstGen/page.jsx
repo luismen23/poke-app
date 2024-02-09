@@ -1,6 +1,6 @@
 import ListOfPokemon from "@/components/ListOfPokemon"
 import Pagination from "@/components/Pagination"
-import { fetchGenerations, fetchUrl, fetchPokemon } from "@/scripts/data" 
+import { fetchUrl, fetchPokemon } from "@/scripts/data" 
 
 export default async function FirstGen({searchParams}) {    
     const fetchGen1 = await fetchPokemon('151', '0')
@@ -10,16 +10,19 @@ export default async function FirstGen({searchParams}) {
     })
     const results = await Promise.all(pokemons)
     
+    
     const page = searchParams['page'] ?? '1'
-    const per_page = '40'
+    const per_page = 40
+    const totalPages = Math.ceil(results.length / per_page)
+   
     
     const start = (Number(page) - 1) * Number(per_page)
     const end = start + Number(per_page)
     const entries = results.slice(start, end)
 
     return (
-        <section>
-            <Pagination data={results} per_page={per_page}/>
+        <section className="">
+            <Pagination data={results} per_page={per_page} totalPages={totalPages}/>
             <ListOfPokemon  entries={entries}/>
             
         </section>
