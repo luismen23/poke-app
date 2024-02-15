@@ -22,6 +22,8 @@ export default async function FourthGen({searchParams}) {
         <section className="">
             <Suspense fallback={<div>Loading ...</div>}>
                 <Pagination data={results} per_page={per_page} totalPages={totalPages}/>
+            </Suspense>
+            <Suspense fallback={<div>Loading Pokemons ...</div>}>
                 <ListOfPokemon  entries={entries}/>
             </Suspense>
             

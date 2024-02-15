@@ -29,7 +29,7 @@ export default function PokeCard ({img, name, types, id}) {
             
             <div className="">
                 <Link href='/'>
-                    <Image src={img} alt='img' width={200} height={200} className="bg-gray-200 rounded-md"/>
+                    <Image src={img} alt='img' width={500} height={500} className="bg-gray-200 rounded-md"/>
                 </Link>
                 <div className="flex flex-col justify-center ">
                     <span className="text-xs">#{id}</span>
