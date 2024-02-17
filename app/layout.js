@@ -15,8 +15,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${arvo.className} antialiased w-full h-full`}>
-        <Image src='/img/bg.jpg' width={1000} height={1000} alt="bg" className="h-screen absolute opacity-20 top-0 w-full z-0 object-cover" />
+      <body className={`${arvo.className} antialiased w-screen h-screen overflow-x-hidden overflow-y-scroll`}>
+
+        <div className="w-full h-full absolute opacity-15">
+          <Image src='/img/bg.jpg' priority fill alt="bg" className="object-cover" />
+        </div>
         <div className="">
           <NavLink />
         </div>

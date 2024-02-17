@@ -4,7 +4,7 @@ const POKE_GEN = 'https://pokeapi.co/api/v2/version-group/?offset=0&limit=30/'
 export async function fetchPokemon( limit, offset) {
     const response = await fetch(POKE_API + `?limit=${limit}&offset=${offset}`)
     const data = await response.json()
-    return data
+    return data.results
 }
 
 export async function fetchGames() {

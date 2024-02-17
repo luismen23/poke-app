@@ -28,15 +28,12 @@ export default function NavLink() {
     return (
         <div className="text-white absolute w-full mx-auto">
             <nav className="flex justify-center items-center md:max-w-[1050px] md:mx-auto md:gap-56 gap-10 ">
-                <Link href='/' className="z-20 hover:scale-110 transition-all duration-200"><Image src="/img/logo4.png" width={1000} height={1000} alt="img" className=" w-[120px] object-center"/></Link>
-                <ul className="sm:flex gap-3 hidden z-10">
-                    {links.map((item, itemId) => {
-                        return (
-                            <li key={itemId}><Link href={item.href} 
-                            className={`${pathname === item.href ? 'bg-yellow-200 text-red-500 p-1 rounded-lg' : ''}`}>{item.name}</Link></li>
-                        )
-                    })}
-                </ul>
+                <Link href='/' className="z-20 hover:scale-110 transition-all duration-200">  
+                    <div className="w-[8rem] h-[8rem] relative">
+                        <Image src="/img/logo4.png" priority fill sizes="auto" alt="img" className=" w-[120px] object-center object-contain"/>
+                    </div>
+                </Link>
+                
             </nav>
         </div>
     )

@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -28,9 +30,11 @@ export default function PokeCard ({img, name, types, id}) {
         <div className="bg-white text-black flex flex-col justify-evenly items-center p-2 min-w-[7rem] h-full rounded-md hover:scale-105 transition-all duration-100">
             
             <div className="">
-                <Link href='/'>
-                    <Image src={img} alt='img' width={500} height={500} className="bg-gray-200 rounded-md"/>
-                </Link>
+                <div className="w-10 h-10 relative">
+                    <Link href='/'>
+                        <Image src={img} alt='img' priority fill className="bg-gray-200 rounded-md object-contain"/>
+                    </Link>
+                </div>
                 <div className="flex flex-col justify-center ">
                     <span className="text-xs">#{id}</span>
                     <h5>{name}</h5>

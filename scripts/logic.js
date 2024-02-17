@@ -15,7 +15,7 @@ export function logic ({results, page}) {
 }
 
 export async function pokemonsFetchByGen({fetchGen1}) {
-    const pokemons = fetchGen1.results.map(async (pokemon) => {
+    const pokemons = fetchGen1.map(async (pokemon) => {
         const pokeData = await fetchUrl(pokemon.url)
         return pokeData
     })
