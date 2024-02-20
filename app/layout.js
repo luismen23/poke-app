@@ -17,12 +17,12 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${arvo.className} antialiased w-screen h-screen overflow-x-hidden overflow-y-scroll`}>
 
-        <div className="w-full h-full absolute opacity-15">
+        {/* <div className="w-full h-full absolute opacity-15">
           <Image src='/img/bg.jpg' priority fill alt="bg" className="object-cover" />
-        </div>
-        <div className="">
-          <NavLink />
-        </div>
+        </div> */}
+        
+        <NavLink />
+        
       
       {children}
       </body>

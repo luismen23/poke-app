@@ -18,3 +18,9 @@ export async function fetchUrl(url) {
     const data = await response.json()
     return data
 }
+
+export async function getPokemonData(name) {
+    const response = await fetch(POKE_API + name)
+    const data = await response.json()
+    return data
+}

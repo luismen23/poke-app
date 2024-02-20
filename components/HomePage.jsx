@@ -57,7 +57,7 @@ export default async function HomePage() {
 
             <table className="w-[20rem] md:w-[40rem] table border border-collapse">
                 <thead className="table-header-group border text-left ">
-                    <tr className="bg-slate-900 rounded-t-2xl">
+                    <tr className="bg-slate-900 ">
                         <th className="border border-gray-500 border-opacity-80 p-2">#</th>
                         <th className="border border-gray-500 border-opacity-80 p-2">Name</th>
                         <th className="border hidden md:table-cell border-gray-500 border-opacity-80 p-2">Attack</th>
@@ -79,7 +79,7 @@ export default async function HomePage() {
                                 <tr key={pokemonId} className="bg-slate-700 even:bg-slate-800 ">
                                     <td className="border table-cell border-gray-500 border-opacity-80 p-2">{pokemon.id}</td>
                                     <td className="border table-cell border-gray-500 border-opacity-80 p-2">
-                                        <Link href='/' className="flex items-center justify-between p-2">
+                                        <Link href={`${pokemon.name}`} className="flex items-center justify-between p-2">
                                             <span className="flex items-center">
                                                 <span className="w-20 h-20 relative">
                                                     <Image src={pokemon.sprites.other['official-artwork'].front_default} alt='img' priority fill sizes="auto" className=" "/>
@@ -90,7 +90,7 @@ export default async function HomePage() {
                                                 {
                                                     types.map((type) => {
                                                         return (
-                                                            <span key={type} className={`${changeType(type)} p-1 rounded-lg text-sm`}>
+                                                            <span key={type} className={`${changeType(type)} p-1 mx-[0.15rem] rounded-lg text-sm`}>
                                                                 {type}
                                                             </span>
                                                         )

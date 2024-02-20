@@ -166,7 +166,7 @@ export default function GameCard() {
   
     
     return (
-        <section className='w-full h-full z-20 relative mt-28'>
+        <section className='w-full h-full z-20 relative mt-36'>
           <ul className='flex flex-col justify-center items-center'>
             <h3>First Generation</h3>
             <Game games={games} generation='first'/>
