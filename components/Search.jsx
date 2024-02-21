@@ -3,9 +3,8 @@
 import dynamic from 'next/dynamic';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
-
 export default function Search() {
-    // estos son hooks del next navigation para poder manejar la url
+
     const searchParams = useSearchParams()
     const pathname = usePathname()
     const {replace} = useRouter()
@@ -13,31 +12,31 @@ export default function Search() {
     const handleChange = (event) => {
         // recuperando el value del input
         const value = event.target.value
+        console.log(value)
 
         // recuperando los params
         const params = new URLSearchParams(searchParams)
         if (value) {
-            params.set('query', value)
+            params.set('search', value)
         } else {
-            params.delete('query')
+            params.delete('search')
         }
         
         // actualizando la url con el input
-        replace(`${pathname}?${params.toString()}`)
-        
+        replace(`${pathname}?${params.toString()}`) 
     }
-
+    
+    
     return (
         <div>
-            <input 
-             placeholder="search"
-             className="border placeholder-red-600 text-black" 
-             onChange={handleChange}
-             defaultValue={searchParams.get('query')?.toString()}
-            />
-
-           
-            
+            <form >
+                <input 
+                placeholder="search your pokemon..."
+                className="border placeholder-slate-600 placeholder-opacity-50 text-black rounded-lg w-[18rem]" 
+                onChange={handleChange}
+                defaultValue={searchParams.get('search')?.toString()}
+                />
+            </form> 
         </div>
     )
     

@@ -20,7 +20,12 @@ export async function fetchUrl(url) {
 }
 
 export async function getPokemonData(name) {
-    const response = await fetch(POKE_API + name)
-    const data = await response.json()
-    return data
+    try {
+        const response = await fetch(POKE_API + name)
+        const data = await response.json()
+        return data
+    }
+    catch(err) {
+        console.log(err)
+    }
 }

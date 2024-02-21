@@ -12,7 +12,7 @@ const links = [
         href: '/games', name: 'games' 
     },
     {
-        href: '/contact', name: 'contact' 
+        href: '/types', name: 'types' 
     },
 ]
 
