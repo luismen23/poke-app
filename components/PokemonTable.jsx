@@ -1,6 +1,5 @@
 import Image from "next/image"
 import Link from "next/link"
-import { fetchPokemon, fetchUrl } from "@/scripts/data";
 
 const changeType = (type) => {
     return type === 'grass' && '/img/grass.webp' ||
@@ -23,17 +22,10 @@ const changeType = (type) => {
     type === 'ghost' && '/img/ghost.webp' 
 }
 
-export default async function PokemonTable({search}) {
+export default async function PokemonTable({search, pokemonData}) {
 
-    const pokemons = await fetchPokemon(10000, 0)
-    const pokemonImg = pokemons.map(async (pokemon) => {
-        const pokeData = await fetchUrl(pokemon.url)
-        return await pokeData
-    })
-    const pokemonData = await Promise.all(pokemonImg)
-    
     return (
-        <table className="w-[20rem] md:w-[40rem] table mb-5">
+        <table className="w-[20rem] md:w-[40rem] table relative">
                 <thead className="table-header-group text-left ">
                     <tr className="bg-slate-900 ">
                         <th className=" p-2">#</th>
@@ -46,7 +38,7 @@ export default async function PokemonTable({search}) {
                 
                 <tbody className="table-row-group">                
                     {
-                        pokemonData.slice(0, 1008).filter((pokemon) => (pokemon.name.toLowerCase().includes(search) || pokemon.id.toString().includes(search))).map((pokemon, pokemonId) => {
+                        pokemonData.filter((pokemon) => (pokemon.name.toLowerCase().includes(search) || pokemon.id.toString().includes(search))).map((pokemon, pokemonId) => {
                             const types = pokemon?.types.map((type)=>{
                                 return type.type.name
                             })
@@ -60,7 +52,7 @@ export default async function PokemonTable({search}) {
                                     <td className=" table-cell p-2">
                                         <Link href={`${pokemon?.name}`} className="flex items-center justify-between p-2">
                                             <span className="flex items-center gap-1">
-                                                <span className="w-10 h-10 relative">
+                                                <span className="w-7 h-7 relative">
                                                     <Image src={pokemon?.sprites?.other['official-artwork']?.front_default} alt='img' priority fill sizes="auto" className=" "/>
                                                 </span>
                                                 {pokemon?.name.charAt(0).toUpperCase() + pokemon?.name.slice(1)}
@@ -69,8 +61,8 @@ export default async function PokemonTable({search}) {
                                                 {
                                                     types.map((type) => {
                                                         return (
-                                                            <span key={type} className=" w-7 h-7 relative">
-                                                                <Image src={changeType(type)} fill priority alt={type} className=""/>
+                                                            <span key={type} className=" w-6 h-6 relative">
+                                                                <Image src={changeType(type)} fill priority sizes='auto' alt={type} className=""/>
                                                             </span>
                                                         )
                                                     })

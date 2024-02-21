@@ -2,6 +2,8 @@
 
 import dynamic from 'next/dynamic';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { useDebouncedCallback } from 'use-debounce'
+
 
 export default function Search() {
 
@@ -9,11 +11,10 @@ export default function Search() {
     const pathname = usePathname()
     const {replace} = useRouter()
 
-    const handleChange = (event) => {
-        // recuperando el value del input
-        const value = event.target.value
-        console.log(value)
+    const poke = searchParams.get('search')?.toString()
 
+    const handleChange = useDebouncedCallback((value) => {
+        console.log(value)
         // recuperando los params
         const params = new URLSearchParams(searchParams)
         if (value) {
@@ -21,19 +22,31 @@ export default function Search() {
         } else {
             params.delete('search')
         }
+        params.set('page', '1')
         
         // actualizando la url con el input
-        replace(`${pathname}?${params.toString()}`) 
+        replace(`${pathname}?${params.toString()}`)
+    }, 500 )
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+
+        try {
+           poke !== undefined ? replace(`${pathname + poke}?`) : alert('El pokemon no existe')
+        } catch(error) {
+            alert(error)
+        } 
     }
     
     
     return (
         <div>
-            <form >
+            <form onSubmit={handleSubmit}>
                 <input 
-                placeholder="search your pokemon..."
-                className="border placeholder-slate-600 placeholder-opacity-50 text-black rounded-lg w-[18rem]" 
-                onChange={handleChange}
+                placeholder=" search your pokemon..."
+                className="border placeholder-slate-600 placeholder-opacity-50 text-black rounded-sm w-[15rem]" 
+                onChange={(event) => handleChange(event.target.value)}
                 defaultValue={searchParams.get('search')?.toString()}
                 />
             </form> 

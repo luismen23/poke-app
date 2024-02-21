@@ -3,17 +3,13 @@
 import NavPagination from "./NavPagination";
 import { usePathname, useSearchParams } from "next/navigation";
 
-export default function Pagination({data}) {
+export default function Pagination({totalPages, per_page, dataLength}) {
     
     
     const searchParams = useSearchParams()
     const pathname = usePathname()
+    const page = Number(searchParams.get('page')) || 1
     
-    const page = Number(searchParams.get('page')) ?? 1
-    const dataLength = data.length
-    const per_page = 20
-    const totalPages = Math.ceil(dataLength / per_page)
-
     const createPageUrl = (page) => {
         const params = new URLSearchParams(searchParams)
         params.set('page', page.toString())
