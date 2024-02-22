@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
-const changeType = (type) => {
+export const changeType = (type) => {
     return type === 'grass' && '/img/grass.webp' ||
     type === 'poison' && '/img/poison.webp' ||
     type === 'fire' && '/img/fire.webp' ||
@@ -38,7 +38,7 @@ export default async function PokemonTable({search, pokemonData}) {
                 
                 <tbody className="table-row-group">                
                     {
-                        pokemonData.filter((pokemon) => (pokemon.name.toLowerCase().includes(search) || pokemon.id.toString().includes(search))).map((pokemon, pokemonId) => {
+                        pokemonData.map((pokemon, pokemonId) => {
                             const types = pokemon?.types.map((type)=>{
                                 return type.type.name
                             })

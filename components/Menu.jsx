@@ -2,13 +2,13 @@ import Link from "next/link"
 
 const links = [
     {
-        href: '/', name: 'home' 
+        href: '/', name: 'Home' 
     },
     {
-        href: '/games', name: 'games' 
+        href: '/games', name: 'Games' 
     },
     {
-        href: '/types', name: 'types' 
+        href: '/types', name: 'Types' 
     },
 ]
 

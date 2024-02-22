@@ -1,6 +1,8 @@
 import { getPokemonData } from "@/scripts/data"
 import Image from "next/image"
+import Link from "next/link"
 import { Suspense } from "react"
+import { MdArrowBackIosNew } from "react-icons/md"
 
 const changeType = (type) => {
     return type === 'grass' && 'bg-[#248b46]' ||
@@ -57,7 +59,12 @@ export default async function PokemonPage({params}) {
     })
 
     return (
-        <section className="w-full h-full pt-36">            
+        <section className="w-full h-full pt-36">      
+                <div className="absolute top-28 right-8 border-l border-l-yellow-500/50">
+                    <Link href='/'>
+                        <MdArrowBackIosNew size={25} className="text-yellow-500/70"/>    
+                    </Link>           
+                </div>      
                 <div className={`${changeBg(types?.[0])} flex flex-col items-center w-[20rem] md:w-[30rem] mx-auto gap-4 border border-gray-500  rounded-md p-5 justify-evenly`}>
                     <h1>{pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1)}</h1>
                     <div className="w-[13rem] h-[13rem] md:w-[18rem] md:h-[18rem] relative">

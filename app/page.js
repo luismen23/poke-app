@@ -27,9 +27,6 @@ export default async function Home({searchParams}) {
   
   return (
     <main className="flex flex-col items-center w-screen h-screen pt-32 gap-5">
-      <Suspense fallback='pagination'>
-        <Pagination dataLength={dataLength} totalPages={totalPages} per_page={per_page}/>
-      </Suspense>
       <Suspense key={search + currentPage} fallback='Loading Pokemon'>
         <PokemonTable search={search} pokemonData={entries} currentPage={currentPage}/>
       </Suspense>
