@@ -29,8 +29,8 @@ export default function NavLink() {
     }
 
     return (
-        <div className="text-white w-full mx-auto flex justify-center items-center px-16 top-0 -ml-2 sticky bg-slate-950 z-30">
-            <div className="flex items-center justify-evenly w-full">
+        <div className="text-white w-screen mx-auto top-0 fixed bg-slate-950 border-b border-b-slate-500/70 h-[6rem] z-30">
+            <div className="flex items-center justify-center w-full md:gap-10">
                 <Link href='/' className="z-20 hover:scale-110 transition-all duration-200">  
                     <div className="w-[6rem] h-[6rem] relative">
                         <Image src="/img/logo4.png" priority fill sizes="auto" alt="img" className=" w-[120px] object-center object-contain"/>
@@ -40,15 +40,18 @@ export default function NavLink() {
                 <button onClick={handleClick} className="ml-4 z-30">
                     {show ? <FiX  className="text-white w-7 h-7 md:hidden"/> : <FiMenu  className="text-white w-7 h-7 md:hidden"/>}
                 </button>
+                <nav className="hidden md:flex gap-5 z-20">
+                    {links.map((link, linkId) => {
+                        return (
+                            <Link key={linkId} href={link.href}>{link.name}</Link>
+                            )
+                        })}
+                </nav>
             </div>
-            {show ? <Menu /> : ''}
-            <nav className="hidden md:flex gap-5 z-20">
-                {links.map((link, linkId) => {
-                    return (
-                        <Link key={linkId} href={link.href}>{link.name}</Link>
-                    )
-                })}
-            </nav>
+            <div className="">
+                {show ? <Menu /> : ''}
+            </div>
+            
         </div>
     )
     

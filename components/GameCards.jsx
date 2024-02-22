@@ -1,6 +1,6 @@
 import Game from "./Game"
 
-const games = [
+export const games = [
   {
     name: "red", img: "/img/PokemonRed.webp", id: 1 , releaseDate: "1996", gen: "first"
   },
@@ -167,38 +167,21 @@ export default function GameCard() {
   
     
     return (
-        <section className='w-full h-full z-20 relative mt-10'>
-          <ul className='flex flex-col justify-center items-center'>
-            <h3>First Generation</h3>
+        <section className='w-full h-full z-20 relative mt-28'>
+          <div className='flex flex-col justify-center items-center'>
+            
             <Game games={games} generation='first'/>
-            <h3>Second Generation</h3>
             <Game games={games} generation='second'/>
-            
-            <h3>Third Generation</h3>
             <Game games={games} generation='third'/>
-            
-            <h3>Fourth Generation</h3>
             <Game games={games} generation='fourth'/>
-            
-            <h3>Fifth Generation</h3>
             <Game games={games} generation='fifth'/>
-            
-            <h3>Sixth Generation</h3>
             <Game games={games} generation='sixth'/>
-           
-            <h3>Seventh Generation</h3>
             <Game games={games} generation='seventh'/>
-            
-            <h3>Eighth Generation</h3>
             <Game games={games} generation='eighth'/>
-            
-            <h3>Ninth Generation</h3>
-            <Game games={games} generation='ninth'/>
-            
-            <h3>Others</h3>
+            <Game games={games} generation='ninth'/>            
             <Game games={games} generation='other'/>
             
-          </ul>
+          </div>
           
         </section>
     )

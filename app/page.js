@@ -26,7 +26,7 @@ export default async function Home({searchParams}) {
   const entries = pokemonData.slice(start, end)
   
   return (
-    <main className="flex flex-col items-center w-screen h-screen pt-4 gap-5 ">
+    <main className="flex flex-col items-center w-screen h-screen pt-32 gap-5">
       <Suspense fallback='pagination'>
         <Pagination dataLength={dataLength} totalPages={totalPages} per_page={per_page}/>
       </Suspense>

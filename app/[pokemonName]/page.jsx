@@ -57,11 +57,10 @@ export default async function PokemonPage({params}) {
     })
 
     return (
-        <section className="w-full h-full pt-36">
-            <Suspense fallback='loading'>            
-                <div className={`${changeBg(types?.[0])} flex flex-col items-center w-[15rem] md:w-[30rem] mx-auto gap-4 border border-gray-500  rounded-md p-5 justify-evenly`}>
+        <section className="w-full h-full pt-36">            
+                <div className={`${changeBg(types?.[0])} flex flex-col items-center w-[20rem] md:w-[30rem] mx-auto gap-4 border border-gray-500  rounded-md p-5 justify-evenly`}>
                     <h1>{pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1)}</h1>
-                    <div className="w-[7rem] h-[7rem] md:w-[15rem] md:h-[15rem] relative">
+                    <div className="w-[13rem] h-[13rem] md:w-[18rem] md:h-[18rem] relative">
                         <Image src={pokemonData.sprites.other['official-artwork'].front_default} alt='img' priority fill sizes="auto" className=" "/>
                     </div>
                     <div className="flex items-center gap-1">
@@ -81,10 +80,9 @@ export default async function PokemonPage({params}) {
                         </span>
                     </div>
                 </div>
-            </Suspense>
             <div className="flex flex-col items-center mt-3">
                 <h2>Stats</h2>
-                <table className="table border-collapse w-[14rem]">
+                <table className="table border-collapse w-[19rem]">
                     <tbody>
                         {stats.map(({base_stat, stat}) => {
                             return (

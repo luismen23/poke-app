@@ -16,7 +16,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${arvo.className} antialiased w-screen h-screen overflow-x-hidden overflow-y-scroll`}>
+      <body className={`${arvo.className} antialiased w-screen overflow-x-hidden relative`}>
       <Suspense fallback='loading nav'>
         <NavLink />
       </Suspense>

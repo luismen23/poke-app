@@ -45,7 +45,7 @@ export default function Search() {
             <form onSubmit={handleSubmit}>
                 <input 
                 placeholder=" search your pokemon..."
-                className="border placeholder-slate-600 placeholder-opacity-50 text-black rounded-sm w-[15rem]" 
+                className="border placeholder-slate-600 placeholder-opacity-50 text-black rounded-sm w-[12rem] md:w-[18rem] placeholder:text-sm md:placeholder:text-base" 
                 onChange={(event) => handleChange(event.target.value)}
                 defaultValue={searchParams.get('search')?.toString()}
                 />
