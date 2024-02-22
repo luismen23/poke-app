@@ -1,4 +1,5 @@
-import Game from './Game'
+import Game from "./Game"
+
 const games = [
   {
     name: "red", img: "/img/PokemonRed.webp", id: 1 , releaseDate: "1996", gen: "first"
@@ -166,7 +167,7 @@ export default function GameCard() {
   
     
     return (
-        <section className='w-full h-full z-20 relative mt-36'>
+        <section className='w-full h-full z-20 relative mt-10'>
           <ul className='flex flex-col justify-center items-center'>
             <h3>First Generation</h3>
             <Game games={games} generation='first'/>

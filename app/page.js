@@ -1,7 +1,6 @@
 
 import Pagination from "@/components/Pagination";
 import PokemonTable from "@/components/PokemonTable";
-import Search from "@/components/Search";
 import { fetchPokemon, fetchUrl } from "@/scripts/data";
 import { Suspense } from "react";
 
@@ -28,15 +27,15 @@ export default async function Home({searchParams}) {
   
   return (
     <main className="flex flex-col items-center w-screen h-screen pt-4 gap-5 ">
-      <div>
+      <Suspense fallback='pagination'>
         <Pagination dataLength={dataLength} totalPages={totalPages} per_page={per_page}/>
-      </div>
+      </Suspense>
       <Suspense key={search + currentPage} fallback='Loading Pokemon'>
         <PokemonTable search={search} pokemonData={entries} currentPage={currentPage}/>
       </Suspense>
-      <div>
+      <Suspense fallback='pagination'>
         <Pagination dataLength={dataLength} totalPages={totalPages} per_page={per_page}/>
-      </div>
+      </Suspense>
     </main>
   );
 }

@@ -8,10 +8,10 @@ export default function NavPagination({totalPages, page, createPageUrl, dataLeng
     }
 
     return (
-  <div className="flex items-center w-[20rem] justify-center mx-auto border-t border-gray-200 bg-slate-900 px-2 py-2 sm:px-6 rounded-md relative">
+  <div className="flex items-center w-[20rem] md:w-[30rem] justify-center mx-auto border-t border-gray-200 bg-slate-900 px-2 py-2 sm:px-6 rounded-md relative">
   
-  <div className="flex flex-1 items-center justify-between">
-    <div>
+  <div className="flex flex-1 items-center justify-between px-1">
+    <div className="w-16">
       <p className="text-xs md:text-sm text-white">
         <span className="font-medium">
         {
