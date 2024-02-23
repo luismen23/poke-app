@@ -36,7 +36,6 @@ export default function Search({setResults}) {
     }
 
     const handleChange = useDebouncedCallback((value) => {
-        console.log(value)
         // recuperando los params
         const params = new URLSearchParams(searchParams)
         if (value) {

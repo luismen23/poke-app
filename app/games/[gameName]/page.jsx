@@ -8,7 +8,7 @@ export default function GamePage({params}) {
     
     
     return (
-        <section className="w-full h-full pt-36 flex flex-col justify-center items-center relative"> 
+        <section className="w-full h-full pt-36 flex flex-col justify-center items-center relative "> 
                 <div className="absolute top-28 right-8 border-l border-l-yellow-500/50">
                     <Link href='/games'>
                         <MdArrowBackIosNew size={25} className="text-yellow-500/70"/>    
@@ -17,11 +17,11 @@ export default function GamePage({params}) {
                 <div>
                     Pokemon {gameName.charAt(0).toUpperCase() + gameName.slice(1)}
                 </div>
-                <div>
+                <div className="mt-10">
                     {games.filter((game) => game.name === gameName).map((game)=>{ 
                         
                         return (
-                            <div key={game.name} className="w-[20rem] h-[20rem] relative">
+                            <div key={game.name} className="w-[20rem] h-[21rem] relative">
                                 <Image src={game.img} fill priority sizes="auto" alt={game.name}/>
                             </div>
                         )
