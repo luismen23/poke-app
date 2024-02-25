@@ -22,7 +22,7 @@ export const changeType = (type) => {
     type === 'ghost' && '/img/ghost.webp' 
 }
 
-export default async function PokemonTable({search, pokemonData}) {
+export default async function PokemonTable({pokemonData}) {
 
     return (
         <table className="w-[20rem] md:w-[40rem] table relative">

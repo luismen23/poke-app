@@ -14,7 +14,7 @@ const links = [
 
 export default function Menu() {
     return (
-        <div className="absolute h-screen right-0 top-0 bg-slate-900 border-l-slate-700 border-l w-[10rem] z-20">
+        <div className="absolute h-screen right-0 top-0 bg-slate-900 border-l-slate-700 border-l w-[10rem] z-30">
             <nav className="flex flex-col gap-5 z-20 text-white h-full justify-center items-center ">
                 {links.map((link, linkId) => {
                     return (

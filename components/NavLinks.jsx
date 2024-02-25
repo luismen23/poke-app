@@ -22,32 +22,24 @@ const links = [
 ]
 
 export default function NavLink() {
-    const pathname = usePathname()
     const [show, setShow] = useState(false)
-    const [results, setResults] = useState([])
 
     const handleClick = () => {
          setShow(!show)
     }
 
     return (
-        <div className="text-white w-screen mx-auto top-0 fixed bg-slate-950 border-b border-b-slate-500/70 h-[6rem] z-30">
-            <div className="flex items-center justify-center w-full gap-48 md:gap-56 -ml-3">
+        <div className="text-white w-screen mx-auto top-0 fixed bg-slate-950 border-b border-b-slate-500/70 h-[6rem] z-10">
+            <div className="flex items-center justify-center w-full gap-52 md:gap-56 -ml-3">
                 <Link href='/' className="z-20 hover:scale-110 transition-all duration-200">  
                     <div className="w-[6rem] h-[6rem] relative">
                         <Image src="/img/logo4.png" priority fill sizes="auto" alt="img" className=" w-[120px] object-center object-contain"/>
                     </div>
                 </Link>
-                <div className="flex flex-col justify-center items-center top-0 fixed mt-8 ml-12">
-                    <Search setResults={setResults} />
-                    <Suspense fallback='loading search results'>
-                        <SearchResults results={results} /> 
-                    </Suspense>
-                </div>
-                <button onClick={handleClick} className="z-30">
+                <button onClick={handleClick} className="z-40 relative">
                     {show ? <FiX  className="text-white w-7 h-7 md:hidden"/> : <FiMenu  className="text-white w-7 h-7 md:hidden"/>}
                 </button>
-                <nav className="hidden md:flex gap-5 z-20">
+                <nav className="hidden md:flex gap-5 z-30">
                     {links.map((link, linkId) => {
                         return (
                             <Link key={linkId} href={link.href}>{link.name}</Link>
@@ -55,9 +47,9 @@ export default function NavLink() {
                         })}
                 </nav>
             </div>
-            <div className="">
-                {show ? <Menu /> : ''}
-            </div>
+            
+            {show ? <Menu /> : ''}
+            
             
         </div>
     )

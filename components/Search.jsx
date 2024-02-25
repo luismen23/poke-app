@@ -10,27 +10,17 @@ import { useState } from 'react';
 import { useRef } from 'react';
 
 
-export default function Search({setResults}) {
+export default function Search({setResults, response}) {
     const [changeIcon, setChangeIcon] = useState(false)
     const inputRef = useRef(null)
-    
     const searchParams = useSearchParams()
     const pathname = usePathname()
     const {replace} = useRouter()
 
-    const poke = searchParams.get('search')?.toString()
-
     const fetchData = async (value) => {
-        const fetchAllPokemon = await fetchPokemon(1008, 0)
-        
-        const pokemons = fetchAllPokemon.map(async (pokemon) => {
-            const pokeData = await fetchUrl(pokemon?.url)
-            return pokeData
-        })
-        const response = await Promise.all(pokemons)
-        
+
         const results = response.filter((pokemon) => {
-            return value !== '' && pokemon && pokemon.name && pokemon.name.toLowerCase().includes(value) && pokemon.id && pokemon.types[0]?.type?.name
+            return value !== '' && pokemon && pokemon.name.toLowerCase() && pokemon.name.toLowerCase().includes(value.toLowerCase()) || pokemon.id.toString() && pokemon.id.toString().includes(value.toString()) || pokemon.types[0].type.name.toLowerCase() && pokemon.types[0].type.name.toLowerCase().includes(value.toLowerCase())
         })
         setResults(results)
     }
@@ -71,12 +61,12 @@ export default function Search({setResults}) {
     
     
     return (
-        <div>
-            <form className='flex bg-white gap-1 border rounded-md hover:border-yellow-500/90 hover:border hover:shadow-md hover:shadow-yellow-500/70 w-[12rem] md:w-[18rem] justify-between p-1'>
+        
+            <form className='flex bg-white gap-1 border rounded-md hover:border-yellow-500/90 hover:border hover:shadow-md hover:shadow-yellow-500/70 justify-between p-1 z-20'>
                 <input 
                 ref={inputRef}
-                placeholder=" Search..."
-                className=" placeholder-slate-600 placeholder-opacity-50 text-slate-900   placeholder:text-sm w-full md:placeholder:text-base px-1 bg-transparent focus:outline-none" 
+                placeholder=" Search by name, nº or type"
+                className=" placeholder-slate-600 placeholder-opacity-50 text-slate-900 placeholder:text-xs md:placeholder:text-sm px-1 bg-transparent focus:outline-none w-[10rem] md:w-[18rem] " 
                 onChange={(event) => handleChange(event.target.value)}
                 defaultValue={searchParams.get('search')?.toString()}
                 />
@@ -84,7 +74,7 @@ export default function Search({setResults}) {
                     {changeIcon ? <IoMdClose size={20} className='m-1'/> : <FaSearch size={20} className='m-1'/>}
                 </button>
             </form> 
-        </div>
+        
     )
     
 }
