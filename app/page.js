@@ -12,7 +12,7 @@ export default async function Home({searchParams}) {
   const search = await searchParams?.search || ''
 
   // fetching for table
-  const pokemons = await fetchPokemon(151, 0)
+  const pokemons = await fetchPokemon(40, 0)
   const pokemonImg = pokemons.map(async (pokemon) => {
         const pokeData = await fetchUrl(pokemon.url)
         return await pokeData
@@ -20,7 +20,7 @@ export default async function Home({searchParams}) {
   const pokemonData = await Promise.all(pokemonImg)
 
   // fetch for searchBar
-  const fetchAllPokemon = await fetchPokemon(1008, 0)     
+  const fetchAllPokemon = await fetchPokemon(450, 0)     
   const allPokemon = fetchAllPokemon.map(async (pokemon) => {
       const pokeData = await fetchUrl(pokemon?.url)
       const image = pokeData.sprites?.other['official-artwork']?.front_default
