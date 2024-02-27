@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { Suspense } from "react"
 
 export const changeType = (type) => {
     return type === 'grass' && '/img/grass.webp' ||
@@ -47,33 +48,35 @@ export default async function PokemonTable({pokemonData}) {
                                 return base_stat
                             })
                             return (
-                                <tr key={pokemonId} className="bg-slate-700 even:bg-slate-800 ">
-                                    <td className=" table-cell p-2">{pokemon?.id}</td>
-                                    <td className=" table-cell p-2">
-                                        <Link href={`${pokemon?.name}`} className="flex items-center justify-between p-2">
-                                            <span className="flex items-center gap-1">
-                                                <span className="w-7 h-7 relative">
-                                                    <Image src={pokemon?.image} alt='img' priority fill sizes="auto" className=" "/>
+                                <Suspense key={pokemonId} fallback='loading pokemon' >
+                                    <tr className="bg-slate-700 even:bg-slate-800 ">
+                                        <td className=" table-cell p-2">{pokemon?.id}</td>
+                                        <td className=" table-cell p-2">
+                                            <Link href={`${pokemon?.name}`} className="flex items-center justify-between p-2">
+                                                <span className="flex items-center gap-1">
+                                                    <span className="w-7 h-7 relative">
+                                                        <Image src={pokemon?.image} alt='img' priority fill sizes="auto" className=" "/>
+                                                    </span>
+                                                    {pokemon?.name.charAt(0).toUpperCase() + pokemon?.name.slice(1)}
                                                 </span>
-                                                {pokemon?.name.charAt(0).toUpperCase() + pokemon?.name.slice(1)}
-                                            </span>
-                                            <span className="flex gap-1">
-                                                {
-                                                    types.map((type) => {
-                                                        return (
-                                                            <span key={type} className=" w-6 h-6 relative">
-                                                                <Image src={changeType(type)} fill priority sizes='auto' alt={type} className=""/>
-                                                            </span>
-                                                        )
-                                                    })
-                                                }
-                                            </span>
-                                        </Link>
-                                    </td>
-                                    <td className=" hidden md:table-cell p-2">{stats?.[1]} ATK</td>
-                                    <td className=" hidden md:table-cell p-2">{stats?.[2]} DEF</td>
-                                    <td className=" hidden md:table-cell p-2">{stats?.[0]} HP</td>
-                                </tr>
+                                                <span className="flex gap-1">
+                                                    {
+                                                        types.map((type) => {
+                                                            return (
+                                                                <span key={type} className=" w-6 h-6 relative">
+                                                                    <Image src={changeType(type)} fill priority sizes='auto' alt={type} className=""/>
+                                                                </span>
+                                                            )
+                                                        })
+                                                    }
+                                                </span>
+                                            </Link>
+                                        </td>
+                                        <td className=" hidden md:table-cell p-2">{stats?.[1]} ATK</td>
+                                        <td className=" hidden md:table-cell p-2">{stats?.[2]} DEF</td>
+                                        <td className=" hidden md:table-cell p-2">{stats?.[0]} HP</td>
+                                    </tr>
+                                </Suspense>
                             )
                         })
                     }
