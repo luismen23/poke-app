@@ -1,8 +1,7 @@
 import { Arvo } from "next/font/google";
 import "./globals.css";
 import NavLink from "@/components/NavLinks";
-import Image from "next/image";
-import { Suspense } from "react";
+
 
 
 
@@ -17,9 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${arvo.className} antialiased w-screen overflow-x-hidden relative`}>
-      <Suspense fallback='loading nav'>
-        <NavLink />
-      </Suspense>
+      <NavLink />
       {children}
       </body>
     </html>
