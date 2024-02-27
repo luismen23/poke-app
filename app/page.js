@@ -12,7 +12,7 @@ export default async function Home({searchParams}) {
   const search = await searchParams?.search || ''
 
   // fetching for table
-  const pokemons = await fetchPokemon(151, 0)
+  const pokemons = await fetchPokemon(1008, 0)
   const pokemonImg = pokemons.map(async (pokemon) => {
     const pokeData = await fetchUrl(pokemon.url)
     const image = pokeData.sprites?.other['official-artwork']?.front_default
@@ -32,7 +32,7 @@ export default async function Home({searchParams}) {
   // const response = await Promise.all(allPokemon)
   
   const dataLength = pokemonData.length
-  const per_page = 40
+  const per_page = 50
   const totalPages = Math.ceil(dataLength / per_page)
 
   const start = (Number(currentPage) - 1) * per_page
@@ -42,7 +42,7 @@ export default async function Home({searchParams}) {
   return (
     <main className="flex flex-col items-center w-screen h-screen pt-32 gap-5"> 
       <Suspense fallback='loading results'>
-        <SearchBar response={entries}/>
+        <SearchBar response={pokemonData}/>
       </Suspense>
       <Suspense key={search + currentPage} fallback='Loading Pokemon'>
         <PokemonTable search={search} pokemonData={entries} currentPage={currentPage}/>
