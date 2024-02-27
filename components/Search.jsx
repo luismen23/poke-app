@@ -5,7 +5,6 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce'
 import { FaSearch } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-import { fetchPokemon, fetchUrl } from '@/scripts/data';
 import { useState } from 'react';
 import { useRef } from 'react';
 
@@ -17,7 +16,7 @@ export default function Search({setResults, response}) {
     const pathname = usePathname()
     const {replace} = useRouter()
 
-    const fetchData = async (value) => {
+    const fetchData = (value) => {
 
         const results = response.filter((pokemon) => {
             return value !== '' && pokemon && pokemon.name.toLowerCase() && pokemon.name.toLowerCase().includes(value.toLowerCase()) || pokemon.id.toString() && pokemon.id.toString().includes(value.toString()) || pokemon.types[0].type.name.toLowerCase() && pokemon.types[0].type.name.toLowerCase().includes(value.toLowerCase())
@@ -31,13 +30,15 @@ export default function Search({setResults, response}) {
         if (value) {
             params.set('search', value)
             setChangeIcon(true)
+            fetchData(value)
         } else {
             params.delete('search')
             setChangeIcon(false)
+            setResults([])
+
         }
         params.set('page', '1')
         
-        fetchData(value)
 
         // actualizando la url con el input
         replace(`${pathname}?${params.toString()}`)
@@ -62,8 +63,9 @@ export default function Search({setResults, response}) {
     
     return (
         
-            <form className='flex bg-white gap-1 border rounded-md hover:border-yellow-500/90 hover:border hover:shadow-md hover:shadow-yellow-500/70 justify-between p-1 z-20'>
+            <form className='flex bg-white gap-1 border rounded-md hover:border-yellow-500/90 hover:border hover:shadow-md hover:shadow-yellow-500/70 justify-between p-1 z-10' id='input'>
                 <input 
+                name='input'
                 ref={inputRef}
                 placeholder=" Search by name, nº or type"
                 className=" placeholder-slate-600 placeholder-opacity-50 text-slate-900 placeholder:text-xs md:placeholder:text-sm px-1 bg-transparent focus:outline-none w-[10rem] md:w-[18rem] " 

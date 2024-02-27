@@ -47,8 +47,9 @@ export default function NavLink() {
                         })}
                 </nav>
             </div>
-            
-            {show ? <Menu /> : ''}
+            <div className="relative z-30">
+                {show ? <Menu handleClick={handleClick}/> : ''}
+            </div>
             
             
         </div>

@@ -12,22 +12,24 @@ export default async function Home({searchParams}) {
   const search = await searchParams?.search || ''
 
   // fetching for table
-  const pokemons = await fetchPokemon(40, 0)
+  const pokemons = await fetchPokemon(151, 0)
   const pokemonImg = pokemons.map(async (pokemon) => {
-        const pokeData = await fetchUrl(pokemon.url)
-        return await pokeData
+    const pokeData = await fetchUrl(pokemon.url)
+    const image = pokeData.sprites?.other['official-artwork']?.front_default
+    const {name, id, types, stats} = pokeData
+      return {name, id, types, stats, image}
     })
   const pokemonData = await Promise.all(pokemonImg)
 
   // fetch for searchBar
-  const fetchAllPokemon = await fetchPokemon(450, 0)     
-  const allPokemon = fetchAllPokemon.map(async (pokemon) => {
-      const pokeData = await fetchUrl(pokemon?.url)
-      const image = pokeData.sprites?.other['official-artwork']?.front_default
-      const {name, id, types} = pokeData
-      return {name, id, types, image}
-  })
-  const response = await Promise.all(allPokemon)
+  // const fetchAllPokemon = await fetchPokemon(100, 0)     
+  // const allPokemon = fetchAllPokemon.map(async (pokemon) => {
+  //     const pokeData = await fetchUrl(pokemon?.url)
+  //     const image = pokeData.sprites?.other['official-artwork']?.front_default
+  //     const {name, id, types} = pokeData
+  //     return {name, id, types, image}
+  // })
+  // const response = await Promise.all(allPokemon)
   
   const dataLength = pokemonData.length
   const per_page = 40
@@ -40,7 +42,7 @@ export default async function Home({searchParams}) {
   return (
     <main className="flex flex-col items-center w-screen h-screen pt-32 gap-5"> 
       <Suspense fallback='loading results'>
-        <SearchBar response={response}/>
+        <SearchBar response={entries}/>
       </Suspense>
       <Suspense key={search + currentPage} fallback='Loading Pokemon'>
         <PokemonTable search={search} pokemonData={entries} currentPage={currentPage}/>

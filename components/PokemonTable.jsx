@@ -53,7 +53,7 @@ export default async function PokemonTable({pokemonData}) {
                                         <Link href={`${pokemon?.name}`} className="flex items-center justify-between p-2">
                                             <span className="flex items-center gap-1">
                                                 <span className="w-7 h-7 relative">
-                                                    <Image src={pokemon?.sprites?.other['official-artwork']?.front_default} alt='img' priority fill sizes="auto" className=" "/>
+                                                    <Image src={pokemon?.image} alt='img' priority fill sizes="auto" className=" "/>
                                                 </span>
                                                 {pokemon?.name.charAt(0).toUpperCase() + pokemon?.name.slice(1)}
                                             </span>
