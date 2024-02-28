@@ -5,22 +5,24 @@ import Link from "next/link"
 import { FiMenu, FiX } from "react-icons/fi";
 import { useState } from "react";
 import Menu from "./Menu";
+import { usePathname } from "next/navigation";
 
 
 const links = [
     {
-        href: '/', name: 'home' 
+        href: '/', name: 'Pokedex' 
     },
     {
-        href: '/games', name: 'games' 
+        href: '/games', name: 'Games' 
     },
     {
-        href: '/types', name: 'types' 
+        href: '/types', name: 'Types' 
     },
 ]
 
 export default function NavLink() {
     const [show, setShow] = useState(false)
+    const pathname = usePathname()
 
     const handleClick = () => {
          setShow(!show)
@@ -40,7 +42,7 @@ export default function NavLink() {
                 <nav className="hidden md:flex gap-5 z-30">
                     {links.map((link, linkId) => {
                         return (
-                            <Link key={linkId} href={link.href}>{link.name}</Link>
+                            <Link key={linkId} href={link.href} className={`${pathname === link.href && 'underline decoration-4 decoration-yellow-800 underline-offset-4'}`}>{link.name}</Link>
                             )
                         })}
                 </nav>

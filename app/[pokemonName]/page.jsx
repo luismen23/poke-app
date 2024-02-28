@@ -82,7 +82,7 @@ export default async function PokemonPage({params}) {
                             }
                         </div>
                         <span className="w-5 h-5 relative">
-                            <Image src='/img/shiny.webp' alt='img' objectFit="contain" fill sizes="auto" className="text-gray-800"/>
+                            <Image src='/img/shiny.webp' alt='img' fill sizes="auto" className="text-gray-800"/>
                         </span>
                     </div>
                 </div>

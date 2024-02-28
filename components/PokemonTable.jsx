@@ -52,10 +52,10 @@ export default async function PokemonTable({pokemonData}) {
                                     <tr className="bg-slate-700 even:bg-slate-800 ">
                                         <td className=" table-cell p-2">{pokemon?.id}</td>
                                         <td className=" table-cell p-2">
-                                            <Link href={`${pokemon?.name}`} className="flex items-center justify-between p-2">
+                                            <Link href={`${pokemon?.name}`} className="flex items-center justify-between">
                                                 <span className="flex items-center gap-1">
                                                     <span className="w-7 h-7 relative">
-                                                        <Image src={pokemon?.image} alt='img' objectFit="contain" fill sizes="auto" className=" "/>
+                                                        <Image src={pokemon?.image} alt='img' fill sizes="auto" className=""/>
                                                     </span>
                                                     {pokemon?.name.charAt(0).toUpperCase() + pokemon?.name.slice(1)}
                                                 </span>
@@ -64,7 +64,7 @@ export default async function PokemonTable({pokemonData}) {
                                                         types.map((type) => {
                                                             return (
                                                                 <span key={type} className=" w-6 h-6 relative">
-                                                                    <Image src={changeType(type)} fill objectFit="contain" sizes='auto' alt={type} className=""/>
+                                                                    <Image src={changeType(type)} fill sizes='auto' alt={type} className=""/>
                                                                 </span>
                                                             )
                                                         })
