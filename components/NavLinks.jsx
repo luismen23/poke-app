@@ -2,12 +2,10 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { FiMenu, FiX } from "react-icons/fi";
-import Search from "./Search";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import Menu from "./Menu";
-import SearchResults from "./SearchResults";
+
 
 const links = [
     {

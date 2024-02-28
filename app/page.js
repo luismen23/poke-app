@@ -11,7 +11,6 @@ export default async function Home({searchParams}) {
   const currentPage = Number(searchParams?.page) || 1
   const search = await searchParams?.search || ''
 
-  // fetching for table
   const pokemons = await fetchPokemon(151, 0)
   const pokemonImg = pokemons.map(async (pokemon) => {
     const pokeData = await fetchUrl(pokemon.url)
@@ -20,16 +19,6 @@ export default async function Home({searchParams}) {
       return {name, id, types, stats, image}
     })
   const pokemonData = await Promise.all(pokemonImg)
-
-  // fetch for searchBar
-  // const fetchAllPokemon = await fetchPokemon(100, 0)     
-  // const allPokemon = fetchAllPokemon.map(async (pokemon) => {
-  //     const pokeData = await fetchUrl(pokemon?.url)
-  //     const image = pokeData.sprites?.other['official-artwork']?.front_default
-  //     const {name, id, types} = pokeData
-  //     return {name, id, types, image}
-  // })
-  // const response = await Promise.all(allPokemon)
   
   const dataLength = pokemonData.length
   const per_page = 40

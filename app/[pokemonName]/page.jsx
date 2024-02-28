@@ -1,7 +1,6 @@
 import { getPokemonData } from "@/scripts/data"
 import Image from "next/image"
 import Link from "next/link"
-import { Suspense } from "react"
 import { MdArrowBackIosNew } from "react-icons/md"
 
 const changeType = (type) => {
@@ -83,7 +82,7 @@ export default async function PokemonPage({params}) {
                             }
                         </div>
                         <span className="w-5 h-5 relative">
-                            <Image src='/img/shiny.webp' alt='img' priority fill sizes="auto" className="text-gray-800"/>
+                            <Image src='/img/shiny.webp' alt='img' objectFit="contain" fill sizes="auto" className="text-gray-800"/>
                         </span>
                     </div>
                 </div>

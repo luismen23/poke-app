@@ -19,7 +19,7 @@ export default function GamePage({params}) {
                         
                         return (
                             <div key={game.name} className="w-[20rem] h-[21rem] relative">
-                                <Image src={game.img} fill priority sizes="auto" alt={game.name}/>
+                                <Image src={game.img} fill objectFit="contain" priority sizes="auto" alt={game.name}/>
                             </div>
                         )
                     })}

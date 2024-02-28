@@ -1,6 +1,4 @@
 'use client'
-
-import dynamic from 'next/dynamic';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce'
 import { FaSearch } from "react-icons/fa";

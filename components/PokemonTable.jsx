@@ -55,7 +55,7 @@ export default async function PokemonTable({pokemonData}) {
                                             <Link href={`${pokemon?.name}`} className="flex items-center justify-between p-2">
                                                 <span className="flex items-center gap-1">
                                                     <span className="w-7 h-7 relative">
-                                                        <Image src={pokemon?.image} alt='img' priority fill sizes="auto" className=" "/>
+                                                        <Image src={pokemon?.image} alt='img' objectFit="contain" fill sizes="auto" className=" "/>
                                                     </span>
                                                     {pokemon?.name.charAt(0).toUpperCase() + pokemon?.name.slice(1)}
                                                 </span>
@@ -64,7 +64,7 @@ export default async function PokemonTable({pokemonData}) {
                                                         types.map((type) => {
                                                             return (
                                                                 <span key={type} className=" w-6 h-6 relative">
-                                                                    <Image src={changeType(type)} fill priority sizes='auto' alt={type} className=""/>
+                                                                    <Image src={changeType(type)} fill objectFit="contain" sizes='auto' alt={type} className=""/>
                                                                 </span>
                                                             )
                                                         })

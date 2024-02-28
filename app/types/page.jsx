@@ -1,28 +1,5 @@
 
 import Image from 'next/image'
-import { Suspense } from 'react'
-
-export const changeType = (type) => {
-    return type === 'grass' && '/img/grass.webp' ||
-    type === 'poison' && '/img/poison.webp' ||
-    type === 'fire' && '/img/fire.webp' ||
-    type === 'water' && '/img/water.webp' || 
-    type === 'bug' && '/img/bug.webp' ||
-    type === 'flying' && '/img/flying.webp' ||
-    type === 'normal' && '/img/normal.webp' ||
-    type === 'electric' && '/img/electric.webp' || 
-    type === 'ground' && '/img/ground.webp' || 
-    type === 'fairy' && '/img/fairy.webp' || 
-    type === 'fighting' && '/img/fighting.webp' || 
-    type === 'psychic' && '/img/psychic.webp' ||
-    type === 'steel' && '/img/steel.webp' || 
-    type === 'ice' && '/img/ice.webp' || 
-    type === 'rock' && '/img/rock.webp' || 
-    type === 'dragon' && '/img/dragon.webp' || 
-    type === 'dark' && '/img/dark.webp' || 
-    type === 'ghost' && '/img/ghost.webp' 
-}
-
 
 export default function Types() {
     
@@ -153,7 +130,7 @@ export default function Types() {
                         </span>
                     </span>
                     <span className='flex gap-1'>
-                        Ninguno
+                        None
                     </span>
                     <span className='flex gap-1'>
                         <span className="w-6 h-6 relative ">
