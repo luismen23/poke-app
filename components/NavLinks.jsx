@@ -33,7 +33,7 @@ export default function NavLink() {
             <div className="flex items-center justify-center w-full gap-52 md:gap-56 -ml-3">
                 <Link href='/' className="z-20 hover:scale-110 transition-all duration-200">  
                     <div className="w-[6rem] h-[6rem] relative">
-                        <Image src="/img/logo4.png" priority fill sizes="auto" alt="img" className=" w-[120px] object-center object-contain"/>
+                        <Image src="/img/logo4.png" fill priority sizes="auto" alt="img" className="object-contain"/>
                     </div>
                 </Link>
                 <button onClick={handleClick} className="z-40 relative">
