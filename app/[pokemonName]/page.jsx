@@ -1,28 +1,8 @@
+import PokemonShinyImg from "@/components/PokemonShinyImg"
 import { getPokemonData } from "@/scripts/data"
 import Image from "next/image"
 import Link from "next/link"
 import { MdArrowBackIosNew } from "react-icons/md"
-
-const changeType = (type) => {
-    return type === 'grass' && 'bg-[#248b46]' ||
-    type === 'poison' && 'bg-[#b03a9a]' ||
-    type === 'fire' && 'bg-[#be7510]' ||
-    type === 'water' && 'bg-[#3f7dba]' || 
-    type === 'bug' && 'bg-[#85b430]' ||
-    type === 'flying' && 'bg-[#7188b0]' ||
-    type === 'normal' && 'bg-[#727475]' ||
-    type === 'electric' && 'bg-[#c09b2d]' || 
-    type === 'ground' && 'bg-[#aa6641]' || 
-    type === 'fairy' && 'bg-[#c966bf]' || 
-    type === 'fighting' && 'bg-[#a02c3b]' || 
-    type === 'psychic' && 'bg-[#cc595d]' ||
-    type === 'steel' && 'bg-[#548a9e]' || 
-    type === 'ice' && 'bg-[#6ea19f]' || 
-    type === 'rock' && 'bg-[#9f9052]' || 
-    type === 'dragon' && 'bg-[#035094]' || 
-    type === 'dark' && 'bg-[#4f4c5f]' || 
-    type === 'ghost' && 'bg-[#574e87]' 
-}
 
 const changeBg = (type) => {
     return type === 'grass' && 'bg-gradient-to-b from-slate-800 to-[#248b46]/70' ||
@@ -56,6 +36,12 @@ export default async function PokemonPage({params}) {
     const stats = pokemonData?.stats.map(({base_stat, stat})=>{
         return {base_stat, stat}
     })
+    const image = pokemonData.sprites?.other['official-artwork']?.front_default 
+    const imageShiny = pokemonData.sprites?.other['official-artwork']?.front_shiny
+    const moves = pokemonData.moves.map(({move}) => {
+        const {name} = move
+        return {name}
+    })
 
     return (
         <section className="w-full h-full pt-36">      
@@ -64,30 +50,12 @@ export default async function PokemonPage({params}) {
                         <MdArrowBackIosNew size={25} className="text-yellow-500/70"/>    
                     </Link>           
                 </div>      
-                <div className={`${changeBg(types?.[0])} flex flex-col items-center w-[20rem] md:w-[30rem] mx-auto gap-4 border border-gray-500  rounded-md p-5 justify-evenly`}>
+                <div className={`${changeBg(types?.[0])} flex flex-col items-center w-[20rem] md:w-[30rem] mx-auto gap-4 border border-gray-500  rounded-md p-5 justify-evenly mt-2`}>
                     <h1>{pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1)}</h1>
-                    <div className="w-[13rem] h-[13rem] md:w-[18rem] md:h-[18rem] relative">
-                        <Image src={pokemonData.sprites.other['official-artwork'].front_default} alt='img' priority fill sizes="auto" className=" "/>
-                    </div>
-                    <div className="flex items-center gap-1">
-                        <div>
-                            {
-                                types.map((type, typeId) => {
-                                    return (
-                                        <span key={typeId} className={`${changeType(type)} px-2 py-1 rounded-lg text-sm mx-1 shadow-lg`}>
-                                            {type}
-                                        </span>
-                                    )
-                                })
-                            }
-                        </div>
-                        <span className="w-5 h-5 relative">
-                            <Image src='/img/shiny.webp' alt='img' fill sizes="auto" className="text-gray-800"/>
-                        </span>
-                    </div>
+                    <PokemonShinyImg  image={image} imageShiny={imageShiny} types={types}/>
                 </div>
-            <div className="flex flex-col items-center mt-3">
-                <h2>Stats</h2>
+            <div className="flex flex-col items-center my-3">
+                <h2 className="bg-slate-950 border-b border-b-blue-800">weight: {((pokemonData.weight / 10) * 2.204623).toFixed(1)} lbs</h2>
                 <table className="table border-collapse w-[19rem]">
                     <tbody>
                         {stats.map(({base_stat, stat}) => {
@@ -99,8 +67,19 @@ export default async function PokemonPage({params}) {
                             )
                         })}
                     </tbody>
-
                 </table>
+                <div className="flex justify-center flex-col items-center mt-3 ">
+                    <h2 className="bg-slate-950 border-b border-b-blue-800">Moves</h2>
+                    <div className="grid grid-cols-2 items-center w-[19rem] mt-2">
+                            {moves.map(({name}) => {
+                                return (
+                                    <div key={name} className="even:bg-slate-900 mt-1">
+                                        <span className="">☆ {name}</span>
+                                    </div>
+                                )
+                            })}
+                    </div>
+                </div>
             </div>
         </section>
     )

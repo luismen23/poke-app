@@ -23,7 +23,7 @@ export default function Game({games, generation}) {
                   <Link href={`/games/${game.name}`} className="flex items-center justify-between p-2">
                     <span className="flex items-center gap-1">
                       <span className="w-10 h-10 relative rounded-md">
-                        <Image src={game.img} objectFit="contain" fill alt='img' sizes="auto"/>
+                        <Image src={game.img}  fill alt='img' sizes="auto" className="object-contain"/>
                       </span>
                       {game.name.charAt(0).toUpperCase() + game.name.slice(1)}
                     </span>
