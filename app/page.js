@@ -16,7 +16,7 @@ export default async function Home({ searchParams }) {
 
   return (
     <main className='flex flex-col items-center w-screen h-screen pt-32 gap-5'>
-      <SearchBar currentPage={currentPage} />
+      <SearchBar />
 
       <Suspense key={search + currentPage} fallback='Loading Pokemon'>
         <PokemonTable search={search} currentPage={currentPage} />

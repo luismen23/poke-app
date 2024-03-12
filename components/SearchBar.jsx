@@ -3,10 +3,10 @@
 import { Suspense, useState } from 'react';
 import Search from './Search';
 import SearchResults from './SearchResults';
-import useGetPokemon from '@/app/hooks/useGetPokemon';
+import useGetAllPokemon from '@/app/hooks/useGetAllPokemon';
 
-export default function SearchBar({ currentPage }) {
-  const { pokemonDataForSearchBar } = useGetPokemon({ currentPage });
+export default function SearchBar() {
+  const { pokemonDataForSearchBar } = useGetAllPokemon();
   const [results, setResults] = useState([]);
 
   return (
