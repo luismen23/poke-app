@@ -1,6 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense } from 'react';
+import useGetPokemon from '@/app/hooks/useGetPokemon';
+import { useMemo } from 'react';
 
 export const changeType = (type) => {
   return (
@@ -25,7 +28,10 @@ export const changeType = (type) => {
   );
 };
 
-export default async function PokemonTable({ pokemonData }) {
+export default function PokemonTable({ currentPage }) {
+  const { pokemonForTable } = useGetPokemon({ currentPage });
+  const pokemonForTable2 = useMemo(() => pokemonForTable, [pokemonForTable]);
+
   return (
     <table className='w-[20rem] md:w-[40rem] table relative'>
       <thead className='table-header-group text-left '>
@@ -39,7 +45,7 @@ export default async function PokemonTable({ pokemonData }) {
       </thead>
 
       <tbody className='table-row-group'>
-        {pokemonData.map((pokemon, pokemonId) => {
+        {pokemonForTable2.map((pokemon, pokemonId) => {
           const types = pokemon?.types.map((type) => {
             return type.type.name;
           });
@@ -48,50 +54,48 @@ export default async function PokemonTable({ pokemonData }) {
             return base_stat;
           });
           return (
-            <Suspense key={pokemonId} fallback='loading pokemon'>
-              <tr className='bg-slate-700 even:bg-slate-800 '>
-                <td className=' table-cell p-2'>{pokemon?.id}</td>
-                <td className=' table-cell p-2'>
-                  <Link
-                    href={`${pokemon?.name}`}
-                    className='flex items-center justify-between'
-                  >
-                    <span className='flex items-center gap-1'>
-                      <span className='w-7 h-7 relative'>
-                        <Image
-                          src={pokemon?.image}
-                          alt='img'
-                          fill
-                          sizes='auto'
-                          className='object-contain'
-                          loading='lazy'
-                        />
-                      </span>
-                      {pokemon?.name.charAt(0).toUpperCase() +
-                        pokemon?.name.slice(1)}
+            <tr key={pokemon.id} className='bg-slate-700 even:bg-slate-800 '>
+              <td className=' table-cell p-2'>{pokemon?.id}</td>
+              <td className=' table-cell p-2'>
+                <Link
+                  href={`${pokemon?.name}`}
+                  className='flex items-center justify-between'
+                >
+                  <span className='flex items-center gap-1'>
+                    <span className='w-14 h-10 relative'>
+                      <Image
+                        src={pokemon?.image}
+                        alt='img'
+                        fill
+                        sizes='auto'
+                        className='object-cover'
+                        loading='lazy'
+                      />
                     </span>
-                    <span className='flex gap-1'>
-                      {types.map((type) => {
-                        return (
-                          <span key={type} className=' w-6 h-6 relative'>
-                            <Image
-                              src={changeType(type)}
-                              fill
-                              sizes='auto'
-                              alt={type}
-                              className=''
-                            />
-                          </span>
-                        );
-                      })}
-                    </span>
-                  </Link>
-                </td>
-                <td className=' hidden md:table-cell p-2'>{stats?.[1]} ATK</td>
-                <td className=' hidden md:table-cell p-2'>{stats?.[2]} DEF</td>
-                <td className=' hidden md:table-cell p-2'>{stats?.[0]} HP</td>
-              </tr>
-            </Suspense>
+                    {pokemon?.name.charAt(0).toUpperCase() +
+                      pokemon?.name.slice(1)}
+                  </span>
+                  <span className='flex gap-1'>
+                    {types.map((type) => {
+                      return (
+                        <span key={type} className=' w-6 h-6 relative'>
+                          <Image
+                            src={changeType(type)}
+                            fill
+                            sizes='auto'
+                            alt={type}
+                            className=''
+                          />
+                        </span>
+                      );
+                    })}
+                  </span>
+                </Link>
+              </td>
+              <td className=' hidden md:table-cell p-2'>{stats?.[1]} ATK</td>
+              <td className=' hidden md:table-cell p-2'>{stats?.[2]} DEF</td>
+              <td className=' hidden md:table-cell p-2'>{stats?.[0]} HP</td>
+            </tr>
           );
         })}
       </tbody>

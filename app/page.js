@@ -1,43 +1,11 @@
 import SearchBar from '@/components/SearchBar';
 import Pagination from '@/components/Pagination';
 import PokemonTable from '@/components/PokemonTable';
-import { fetchPokemon, fetchUrl } from '@/scripts/data';
 import { Suspense } from 'react';
-
-const mapPageIndexToPokemonRange = {
-  1: {
-    startIndex: 0,
-    endIndex: 40,
-  },
-  2: {
-    startIndex: 40,
-    endIndex: 85,
-  },
-  3: {
-    startIndex: 80,
-    endIndex: 120,
-  },
-};
 
 export default async function Home({ searchParams }) {
   const currentPage = Number(searchParams?.page) || 1;
   const search = (await searchParams?.search) || '';
-
-  const pokemons = await fetchPokemon(151, 0);
-
-  const startIndex = mapPageIndexToPokemonRange[currentPage].startIndex;
-  const endIndex = mapPageIndexToPokemonRange[currentPage].endIndex;
-  const pokemonImg = pokemons
-    .slice(startIndex, endIndex)
-    .map(async (pokemon, index) => {
-      const pokeData = await fetchUrl(pokemon.url);
-      console.log('Me estoy ejecutando!!', index + startIndex);
-      const image = pokeData.sprites?.front_default;
-      const { name, id, types, stats } = pokeData;
-      return { name, id, types, stats, image };
-    });
-
-  const pokemonData = await Promise.all(pokemonImg);
 
   const dataLength = 151;
   const per_page = 40;
@@ -48,14 +16,10 @@ export default async function Home({ searchParams }) {
 
   return (
     <main className='flex flex-col items-center w-screen h-screen pt-32 gap-5'>
-      <SearchBar response={pokemonData} />
+      <SearchBar currentPage={currentPage} />
 
       <Suspense key={search + currentPage} fallback='Loading Pokemon'>
-        <PokemonTable
-          search={search}
-          pokemonData={pokemonData}
-          currentPage={currentPage}
-        />
+        <PokemonTable search={search} currentPage={currentPage} />
       </Suspense>
       <Suspense fallback='pagination'>
         <Pagination
