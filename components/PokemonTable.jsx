@@ -1,11 +1,27 @@
-'use client';
+import { fetchPokemon, fetchUrl } from '@/scripts/data'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import Image from 'next/image';
-import Link from 'next/link';
-import useGetPokemon from '@/app/hooks/useGetPokemon';
-import { useMemo } from 'react';
+const mapPageIndexToPokemonRange = {
+  1: {
+    startIndex: 0,
+    lastIndex: 40,
+  },
+  2: {
+    startIndex: 40,
+    lastIndex: 85,
+  },
+  3: {
+    startIndex: 85,
+    lastIndex: 120,
+  },
+  4: {
+    startIndex: 120,
+    lastIndex: 151,
+  },
+}
 
-export const changeType = (type) => {
+export const changeType = type => {
   return (
     (type === 'grass' && '/img/grass.webp') ||
     (type === 'poison' && '/img/poison.webp') ||
@@ -25,12 +41,21 @@ export const changeType = (type) => {
     (type === 'dragon' && '/img/dragon.webp') ||
     (type === 'dark' && '/img/dark.webp') ||
     (type === 'ghost' && '/img/ghost.webp')
-  );
-};
+  )
+}
 
-export default function PokemonTable({ currentPage }) {
-  const { pokemonForTable } = useGetPokemon({ currentPage });
-  const pokemonForTable2 = useMemo(() => pokemonForTable, [pokemonForTable]);
+export default async function PokemonTable({ currentPage }) {
+  const startIndex = mapPageIndexToPokemonRange[currentPage].startIndex
+  const lastIndex = mapPageIndexToPokemonRange[currentPage].lastIndex
+
+  const pokemon = await fetchPokemon(151, 0)
+  const pokeData = pokemon.slice(startIndex, lastIndex).map(async poke => {
+    const url = await fetchUrl(poke.url)
+    const image = url.sprites?.front_default
+    const { name, id, types, stats } = url
+    return { name, id, types, stats, image }
+  })
+  const pokemonForTable2 = await Promise.all(pokeData)
 
   return (
     <table className='w-[20rem] md:w-[40rem] table relative'>
@@ -46,13 +71,13 @@ export default function PokemonTable({ currentPage }) {
 
       <tbody className='table-row-group'>
         {pokemonForTable2.map((pokemon, pokemonId) => {
-          const types = pokemon?.types.map((type) => {
-            return type.type.name;
-          });
+          const types = pokemon?.types.map(type => {
+            return type.type.name
+          })
 
           const stats = pokemon?.stats.map(({ base_stat }) => {
-            return base_stat;
-          });
+            return base_stat
+          })
           return (
             <tr key={pokemon.id} className='bg-slate-700 even:bg-slate-800 '>
               <td className=' table-cell p-2'>{pokemon?.id}</td>
@@ -76,7 +101,7 @@ export default function PokemonTable({ currentPage }) {
                       pokemon?.name.slice(1)}
                   </span>
                   <span className='flex gap-1'>
-                    {types.map((type) => {
+                    {types.map(type => {
                       return (
                         <span key={type} className=' w-6 h-6 relative'>
                           <Image
@@ -87,7 +112,7 @@ export default function PokemonTable({ currentPage }) {
                             className=''
                           />
                         </span>
-                      );
+                      )
                     })}
                   </span>
                 </Link>
@@ -96,9 +121,9 @@ export default function PokemonTable({ currentPage }) {
               <td className=' hidden md:table-cell p-2'>{stats?.[2]} DEF</td>
               <td className=' hidden md:table-cell p-2'>{stats?.[0]} HP</td>
             </tr>
-          );
+          )
         })}
       </tbody>
     </table>
-  );
+  )
 }
