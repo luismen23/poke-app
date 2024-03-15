@@ -1,12 +1,15 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
 import { changeType } from './PokemonTable'
-import { Suspense } from 'react'
+import { Suspense, useMemo } from 'react'
 
 export default function SearchResults({ results }) {
+  const memoData = useMemo(() => results, [results])
+
   return (
     <div className='bg-slate-800 rounded-sm flex flex-col overflow-y-scroll max-h-[30rem] w-screen mt-6 -ml-5 md:ml-10 md:max-w-[60rem] border-blue-800/90 border-b'>
-      {results.map(result => {
+      {memoData.map(result => {
         const types = result?.types.map(type => {
           return type.type.name
         })

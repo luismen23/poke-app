@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import PokemonTableWrapper from '@/components/PokemonTableWrapper'
 import SearchWrapper from '@/components/SearchWrapper'
+import SearchBar from '@/components/SearchBar'
 
 export default async function Home({ searchParams }) {
   const currentPage = Number(searchParams?.page) || 1
