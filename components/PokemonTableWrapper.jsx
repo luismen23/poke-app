@@ -5,19 +5,19 @@ import Pagination from './Pagination'
 const mapPageIndexToPokemonRange = {
   1: {
     startIndex: 0,
-    lastIndex: 40,
+    lastIndex: 10,
   },
   2: {
-    startIndex: 40,
-    lastIndex: 85,
+    startIndex: 10,
+    lastIndex: 20,
   },
   3: {
-    startIndex: 85,
-    lastIndex: 120,
+    startIndex: 20,
+    lastIndex: 30,
   },
   4: {
-    startIndex: 120,
-    lastIndex: 151,
+    startIndex: 30,
+    lastIndex: 40,
   },
 }
 export default async function PokemonTableWrapper({
@@ -29,7 +29,7 @@ export default async function PokemonTableWrapper({
   const startIndex = mapPageIndexToPokemonRange[currentPage].startIndex
   const lastIndex = mapPageIndexToPokemonRange[currentPage].lastIndex
 
-  const pokemon = await fetchPokemon(151, 0)
+  const pokemon = await fetchPokemon(40, 0)
   const pokeData = pokemon.slice(startIndex, lastIndex).map(async poke => {
     const url = await fetchUrl(poke.url)
     const image = url.sprites?.front_default

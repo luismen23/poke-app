@@ -7,8 +7,8 @@ export default async function Home({ searchParams }) {
   const currentPage = Number(searchParams?.page) || 1
   const search = searchParams.search || ''
 
-  const dataLength = 151
-  const per_page = 40
+  const dataLength = 40
+  const per_page = 10
   const totalPages = Math.ceil(dataLength / per_page)
 
   const start = (Number(currentPage) - 1) * per_page
