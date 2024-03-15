@@ -15,7 +15,7 @@ export default function Pagination({ totalPages, per_page, dataLength }) {
   }
 
   return (
-    <div className='relative z-10'>
+    <div className='relative z-10 mt-2'>
       <NavPagination
         totalPages={totalPages}
         page={page}

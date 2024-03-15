@@ -1,7 +1,7 @@
 import { fetchPokemon, fetchUrl } from '@/scripts/data'
 import SearchBar from './SearchBar'
 
-export default async function SearchFetch({ search }) {
+export default async function SearchWrapper() {
   const pokemon = await fetchPokemon(151, 0)
   const pokeData = pokemon.map(async poke => {
     const url = await fetchUrl(poke.url)
@@ -13,7 +13,7 @@ export default async function SearchFetch({ search }) {
 
   return (
     <div className='flex flex-col justify-center items-center top-0 fixed mt-8  w-[10rem] md:w-[18rem] z-20'>
-      <SearchBar search={search} fetchPoke={fetchPoke} />
+      <SearchBar fetchPoke={fetchPoke} />
     </div>
   )
 }

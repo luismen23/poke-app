@@ -5,7 +5,7 @@ import { useDebouncedCallback } from 'use-debounce'
 import { useEffect, useState } from 'react'
 import { useRef } from 'react'
 
-export default function useSearch({ setResults, fetchPoke }) {
+export default function useSearch({ setResults, memoData }) {
   const [search, setSearch] = useState('')
   const [changeIcon, setChangeIcon] = useState(false)
   const inputRef = useRef(null)
@@ -13,8 +13,10 @@ export default function useSearch({ setResults, fetchPoke }) {
   const pathname = usePathname()
   const { replace } = useRouter()
 
+  const currentPage = searchParams.get('page') || 1
+
   const fetchData = value => {
-    const results = fetchPoke.filter(pokemon => {
+    const results = memoData.filter(pokemon => {
       return (
         (value !== '' &&
           pokemon &&
@@ -55,7 +57,7 @@ export default function useSearch({ setResults, fetchPoke }) {
       setSearch('')
       setResults([])
     }
-    params.set('page', '1')
+    params.set('page', currentPage)
 
     // actualizando la url con el input
     replace(`${pathname}?${params.toString()}`)

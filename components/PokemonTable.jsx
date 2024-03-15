@@ -1,25 +1,8 @@
-import { fetchPokemon, fetchUrl } from '@/scripts/data'
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
-
-const mapPageIndexToPokemonRange = {
-  1: {
-    startIndex: 0,
-    lastIndex: 40,
-  },
-  2: {
-    startIndex: 40,
-    lastIndex: 85,
-  },
-  3: {
-    startIndex: 85,
-    lastIndex: 120,
-  },
-  4: {
-    startIndex: 120,
-    lastIndex: 151,
-  },
-}
+import { useMemo } from 'react'
 
 export const changeType = type => {
   return (
@@ -44,18 +27,8 @@ export const changeType = type => {
   )
 }
 
-export default async function PokemonTable({ currentPage }) {
-  const startIndex = mapPageIndexToPokemonRange[currentPage].startIndex
-  const lastIndex = mapPageIndexToPokemonRange[currentPage].lastIndex
-
-  const pokemon = await fetchPokemon(151, 0)
-  const pokeData = pokemon.slice(startIndex, lastIndex).map(async poke => {
-    const url = await fetchUrl(poke.url)
-    const image = url.sprites?.front_default
-    const { name, id, types, stats } = url
-    return { name, id, types, stats, image }
-  })
-  const pokemonForTable2 = await Promise.all(pokeData)
+export default function PokemonTable({ pokemonForTable }) {
+  const memoData = useMemo(() => pokemonForTable, [pokemonForTable])
 
   return (
     <table className='w-[20rem] md:w-[40rem] table relative'>
@@ -70,7 +43,7 @@ export default async function PokemonTable({ currentPage }) {
       </thead>
 
       <tbody className='table-row-group'>
-        {pokemonForTable2.map((pokemon, pokemonId) => {
+        {memoData.map((pokemon, pokemonId) => {
           const types = pokemon?.types.map(type => {
             return type.type.name
           })

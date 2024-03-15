@@ -1,12 +1,9 @@
-import SearchBar from '@/components/SearchBar'
-import Pagination from '@/components/Pagination'
-import PokemonTable from '@/components/PokemonTable'
 import { Suspense } from 'react'
-import SearchFetch from '@/components/SearchWrapper'
+import PokemonTableWrapper from '@/components/PokemonTableWrapper'
+import SearchWrapper from '@/components/SearchWrapper'
 
 export default async function Home({ searchParams }) {
   const currentPage = Number(searchParams?.page) || 1
-  const search = (await searchParams?.search) || ''
 
   const dataLength = 151
   const per_page = 40
@@ -17,12 +14,12 @@ export default async function Home({ searchParams }) {
 
   return (
     <main className='flex flex-col items-center w-screen h-screen pt-32 gap-5'>
-      <SearchFetch />
-      <Suspense key={search + currentPage} fallback='Loading Pokemon'>
-        <PokemonTable search={search} currentPage={currentPage} />
+      <Suspense fallback='Loading '>
+        <SearchWrapper />
       </Suspense>
-      <Suspense fallback='pagination'>
-        <Pagination
+      <Suspense key={currentPage} fallback='Pokemon'>
+        <PokemonTableWrapper
+          currentPage={currentPage}
           dataLength={dataLength}
           totalPages={totalPages}
           per_page={per_page}
