@@ -9,7 +9,7 @@ export default function useGetPokemon() {
   const pokemonData = useMemo(
     () => async () => {
       try {
-        const pokeFetch = await fetchPokemon(1008, 0)
+        const pokeFetch = await fetchPokemon(1025, 0)
         const pokemonData = pokeFetch.map(async pokemon => {
           const url = await fetchUrl(pokemon.url)
           const image = url.sprites?.front_default
