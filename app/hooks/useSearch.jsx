@@ -39,7 +39,7 @@ export default function useSearch({ setResults, memoData }) {
     }
 
     if (search > 1008) {
-      alert('You can search only until pokemon number 151')
+      alert('You can search only until pokemon number 1008')
     }
   }, [search])
 
