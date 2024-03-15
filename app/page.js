@@ -5,6 +5,7 @@ import SearchBar from '@/components/SearchBar'
 
 export default async function Home({ searchParams }) {
   const currentPage = Number(searchParams?.page) || 1
+  const search = searchParams.search || ''
 
   const dataLength = 151
   const per_page = 40
@@ -16,7 +17,7 @@ export default async function Home({ searchParams }) {
   return (
     <main className='flex flex-col items-center w-screen h-screen pt-32 gap-5'>
       <Suspense fallback='Loading '>
-        <SearchWrapper />
+        <SearchWrapper search={search} />
       </Suspense>
       <Suspense key={currentPage} fallback='Pokemon'>
         <PokemonTableWrapper

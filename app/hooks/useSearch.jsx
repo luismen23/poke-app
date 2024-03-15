@@ -38,7 +38,7 @@ export default function useSearch({ setResults, memoData }) {
       alert('You can not start with a space')
     }
 
-    if (search > 151) {
+    if (search > 1008) {
       alert('You can search only until pokemon number 151')
     }
   }, [search])

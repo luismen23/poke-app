@@ -6,9 +6,9 @@ import SearchResults from './SearchResults'
 import useSearch from '@/app/hooks/useSearch'
 import { useMemo } from 'react'
 
-export default function SearchBar({ fetchPoke }) {
+export default function SearchBar({ pokemonSearch }) {
   const [results, setResults] = useState([])
-  const memoData = useMemo(() => fetchPoke, [fetchPoke])
+  const memoData = useMemo(() => pokemonSearch, [pokemonSearch])
 
   const { changeIcon, inputRef, searchParams, handleChange, handleClick } =
     useSearch({ memoData, setResults })
